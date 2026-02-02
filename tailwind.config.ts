@@ -51,6 +51,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        cyber: {
+          dark: "#0a0e27",
+          purple: "#6366f1",
+          pink: "#ec4899",
+          cyan: "#06b6d4",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -58,6 +64,14 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "glow-pulse": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        "neon-flicker": {
+          "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": { opacity: "1" },
+          "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": { opacity: "0.4" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -70,6 +84,13 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "glow-pulse": "glow-pulse 2s infinite ease-in-out",
+        "neon-flicker": "neon-flicker 2s infinite linear",
+      },
+      boxShadow: {
+        "neon-purple": "0 0 5px theme('colors.cyber.purple'), 0 0 20px theme('colors.cyber.purple')",
+        "neon-pink": "0 0 5px theme('colors.cyber.pink'), 0 0 20px theme('colors.cyber.pink')",
+        "neon-cyan": "0 0 5px theme('colors.cyber.cyan'), 0 0 20px theme('colors.cyber.cyan')",
       },
     },
   },

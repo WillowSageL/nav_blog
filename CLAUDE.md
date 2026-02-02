@@ -1,177 +1,211 @@
-# SMART-6 智能协作系统规则
+# CLAUDE.md
 
-> **核心原则**: 中文回答，Claude 4 原生并行，智能动态生成，MCP工具优先
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
----
+## Project Overview
 
-## ⚡ 三级处理模式
+A modern personal navigation/bookmark manager built with Next.js 15 and Supabase. Features include user authentication, bookmark management with categories, theme switching, and responsive design.
 
-```yaml
-快速处理模式 (70%任务):
-  触发: 文件数 < 3，修改简单，无复杂依赖
-  工具: 基础工具 + mcp__Context7
-  执行: 主Assistant并行工具调用
-  时间: 30秒内
+**Tech Stack:**
+- Frontend: Next.js 15 (App Router), TypeScript, Tailwind CSS
+- UI Components: Shadcn/ui (Radix UI primitives)
+- Backend: Supabase (PostgreSQL + Auth + Storage)
+- Deployment: Vercel
 
-标准协作模式 (25%任务):
-  触发: 中等复杂度，需要专业化分工
-  工具: 基础工具 + 专用工具包
-  执行: 并行项目分析 + 动态生成subagents + 专家协作
-  时间: 2分钟内
+## Common Commands
 
-完整系统模式 (5%任务):
-  触发: 大型项目，复杂架构，多技术栈
-  工具: 全套MCP工具生态
-  执行: 三层并行架构 + 完整subagent团队
-  时间: 5分钟内
+```bash
+# Development
+npm run dev              # Start dev server with Turbopack (http://localhost:3000)
+
+# Build & Production
+npm run build            # Build for production
+npm start                # Start production server
+
+# Code Quality
+npm run lint             # Run ESLint
 ```
 
----
+## Database Setup
 
-## 🚀 并行执行规则
+**Initial Setup:**
+1. Create a Supabase project at https://supabase.com
+2. Copy `.env.example` to `.env.local` and fill in Supabase credentials:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+3. Run SQL scripts in Supabase SQL Editor (in order):
+   - `database.sql` - Creates tables, triggers, RLS policies, seed data
+   - `storage.sql` - Sets up avatar storage bucket and policies
 
-### Claude 4原生并行能力
+**Database Schema:**
+- `profiles` - User profile data (username, display_name, bio, avatar_url, preferences)
+- `categories` - Bookmark categories (name, icon, sort_order)
+- `bookmarks` - Bookmark entries (title, url, description, favicon_url, category_id)
+- `user_settings` - User preferences (theme, layout, show_descriptions)
 
-```yaml
-官方优化提示: "For maximum efficiency, whenever you need to perform multiple independent operations, invoke all relevant tools simultaneously rather than sequentially."
+**Key Features:**
+- Row Level Security (RLS) enabled on all tables - users can only access their own data
+- Auto-creation of profile and settings on user signup via trigger
+- Cascading deletes when user is deleted
+- Auto-updated `updated_at` timestamps via triggers
 
-三层并行架构:
-  L1_工具级并行: Claude 4原生同时工具调用
-  L2_协作并行: 多个subagents独立上下文处理  
-  L3_混合并行: 工具级并行 + subagent协作
+## Architecture
 
-强制并行场景:
-  - 多文件读取 -> 同时Read
-  - 多关键词搜索 -> 同时Grep
-  - 多命令执行 -> 同时Bash
-  - 多资源获取 -> 同时MCP工具调用
+### Directory Structure
 
-禁止并行场景:
-  - 存在依赖关系的操作
-  - 修改相同文件的操作
-  - 资源竞争的操作
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout with providers
+│   ├── page.tsx           # Home page (bookmark display)
+│   └── admin/
+│       └── page.tsx       # Admin page (bookmark/category management)
+├── components/            # React components (mostly client components)
+│   ├── ui/               # Shadcn/ui components (Button, Input, Card, etc.)
+│   ├── EnhancedAuthProvider.tsx    # Auth context with password encryption
+│   ├── EnhancedAuthDialog.tsx      # Login/signup modal
+│   ├── BookmarkManager.tsx         # Bookmark CRUD
+│   ├── CategoryManager.tsx         # Category CRUD
+│   ├── UserProfileEditor.tsx       # Profile editing
+│   └── ...
+└── lib/                   # Utilities and types
+    ├── supabase.ts       # Supabase client initialization
+    ├── types.ts          # TypeScript interfaces (Bookmark, Category, etc.)
+    ├── crypto.ts         # Password encryption utilities
+    ├── profile.ts        # Profile service functions
+    └── database.types.ts # Auto-generated Supabase types
 ```
 
----
+### Key Patterns
 
-## 🔧 MCP工具配置
+**1. Client vs Server Components:**
+- Most components use `'use client'` directive (12+ client components)
+- Root layout is server component, wraps app with providers
+- Client components needed for: auth state, interactive UI, Supabase realtime
 
-```yaml
-基础工具包: Read, Write, Edit, Grep, Glob, Bash, TodoWrite
+**2. Authentication Flow:**
+- `EnhancedAuthProvider` wraps entire app in `layout.tsx`
+- Provides auth context: `user`, `session`, `loading`, `signIn`, `signUp`, `signOut`
+- Uses Supabase Auth with localStorage persistence
+- Password encryption available but disabled by default (Supabase compatibility)
+- Access via `useAuth()` hook in any component
 
-核心MCP工具包:
-  - mcp__Context7: 框架文档查询
-  - mcp__fetch__fetch: 网络资源获取
-  - mcp__sequential-thinking: 复杂逻辑分析
+**3. Data Fetching:**
+- Direct Supabase client calls in components (no API routes)
+- Parallel fetching with `Promise.all()` for initial page load
+- Example from `page.tsx:30-34`:
+  ```typescript
+  const [profileData, categoriesData, bookmarksData] = await Promise.all([
+    profileService.getProfile(user),
+    supabase.from('categories').select('*').order('sort_order'),
+    supabase.from('bookmarks').select('*, category:categories(*)').eq('is_active', true)
+  ])
+  ```
 
-专用工具包:
-  前端项目: + mcp__chrome-mcp-stdio, mcp__Playwright
-  后端项目: + mcp__tavily__tavily-search, mcp__desktop-commander
-  数据项目: + mcp__tavily__tavily-search, mcp__desktop-commander
-  全栈项目: + 所有工具
+**4. State Management:**
+- React Context for auth state (EnhancedAuthProvider)
+- Local component state with useState
+- No external state management library (Redux, Zustand, etc.)
 
-强制替换:
-  ❌ WebFetch -> ✅ mcp__fetch__fetch
-  ❌ WebSearch -> ✅ mcp__tavily__tavily-search
+**5. Styling:**
+- Tailwind CSS utility classes
+- CSS variables in `globals.css` for theming
+- Shadcn/ui components with `cn()` utility for class merging
+- Responsive design with Tailwind breakpoints
+
+**6. Type Safety:**
+- TypeScript strict mode enabled
+- Path alias `@/*` maps to `./src/*`
+- Supabase types in `lib/database.types.ts`
+- Custom interfaces in `lib/types.ts`
+
+## Important Implementation Details
+
+### Password Security System
+
+The codebase includes a comprehensive password encryption system (`lib/crypto.ts`) with multiple encryption schemes:
+- Simple SHA256 hashing
+- PBKDF2 with salt
+- AES symmetric encryption
+- Password strength validation
+
+**IMPORTANT:** Client-side encryption is **disabled by default** to maintain Supabase Auth compatibility. The `useEncryption` parameter in `signIn`/`signUp` defaults to `false`. Only enable if implementing custom auth backend.
+
+### Image Handling
+
+`next.config.js` allows remote images from any domain for favicon fetching:
+```javascript
+remotePatterns: [
+  { protocol: 'https', hostname: '**' },
+  { protocol: 'http', hostname: '**' }
+]
 ```
 
----
+### Admin Page Protection
 
-## 🎯 动态生成机制
-
-### 项目分析流程
-
-```yaml
-Phase 1 - 并行项目感知 (5秒):
-  同时执行:
-    - Read: package.json, requirements.txt, docker-compose.yml, README.md
-    - Grep: 技术栈关键词, 框架模式, 业务领域词汇
-    - Glob: 源码目录结构, 配置文件模式
-    - Bash: git信息, 依赖列表, 目录结构
-
-Phase 2 - 智能需求识别:
-  触发条件:
-    前端需求: React/Vue/Angular -> frontend-expert
-    后端需求: Express/FastAPI/Spring -> backend-expert
-    数据需求: 数据库配置 -> data-expert
-    部署需求: Docker/CI配置 -> devops-expert
-
-Phase 3 - 自动生成Subagent:
-  创建位置: .claude/agents/目录
-  文件格式: {project}-{domain}-expert.md
-  自动注入: 并行优化指导 + 项目上下文 + 工具权限 + 协作接口
+`/admin` page uses client-side redirect if user not authenticated:
+```typescript
+useEffect(() => {
+  if (!loading && !user && !hasRedirected.current) {
+    hasRedirected.current = true
+    redirect('/')
+  }
+}, [loading, user])
 ```
 
-### Subagent模板结构
+### Profile Auto-Creation
 
-```yaml
-标准格式:
----
-name: {project}-{domain}-expert
-description: 专门处理{domain}任务。检测到{tech_stack}，自动优化{specialization}。内置并行执行优化。
-tools: {auto_configured_tools}
----
+Database trigger automatically creates profile and user_settings when new user signs up (see `database.sql:98-153`). No manual profile creation needed in application code.
 
-你是{project}项目的{domain}专家。
+### Storage Bucket
 
-## 并行执行优化
-**官方指导**: For maximum efficiency, invoke all relevant tools simultaneously rather than sequentially.
+Avatar uploads use Supabase Storage bucket `avatars`:
+- Public read access
+- Users can only upload/update/delete their own avatars
+- File path pattern: `{user_id}/avatar.{ext}`
+- See `profileService.uploadAvatar()` in `lib/profile.ts`
 
-**并行策略**: {auto_generated_parallel_strategies}
+## Development Workflow
 
-## 项目上下文
-- 技术栈: {detected_stack}
-- 架构模式: {detected_architecture}
-- 专业职责: {specific_responsibilities}
+1. **Adding New Features:**
+   - Create components in `src/components/`
+   - Use `'use client'` if component needs interactivity or hooks
+   - Import types from `@/lib/types`
+   - Use Supabase client from `@/lib/supabase`
 
-## 协作接口
-{auto_configured_collaboration_interfaces}
+2. **Database Changes:**
+   - Modify `database.sql` with new schema
+   - Run updated SQL in Supabase SQL Editor
+   - Regenerate types: `npx supabase gen types typescript --project-id <project-id> > src/lib/database.types.ts`
 
-## 并行工具组合
-{optimized_tool_combinations}
+3. **Adding UI Components:**
+   - Use existing Shadcn/ui components from `components/ui/`
+   - Add new Shadcn components: `npx shadcn-ui@latest add <component-name>`
+   - Follow existing patterns for styling and composition
+
+4. **Authentication:**
+   - Always check `loading` state before checking `user`
+   - Use `useAuth()` hook to access auth state
+   - Protected pages should redirect if `!user`
+
+## Common Pitfalls
+
+1. **Race Conditions:** Check `authLoading` before accessing `user` to avoid race conditions
+2. **RLS Policies:** All database operations are subject to RLS - ensure user is authenticated
+3. **Client Components:** Don't forget `'use client'` directive when using hooks or browser APIs
+4. **Password Encryption:** Don't enable client-side encryption without understanding Supabase Auth implications
+5. **Image Domains:** Add new domains to `next.config.js` if restricting remote image patterns
+
+## Environment Variables
+
+Required in `.env.local`:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
----
-
-## 📋 执行流程
-
-```yaml
-智能分流:
-  1. 并行项目感知 (5秒)
-  2. 复杂度评估和模式选择
-  3. 动态生成subagents (如需要)
-  4. 执行任务 (每个subagent内部并行)
-  5. 并行质量检查和整合
-
-用户体验:
-  输入: 开发需求
-  系统: 自动分析 -> 生成专家 -> 协作执行
-  输出: 完整解决方案 + 生成的subagents可复用
+Optional (for password encryption, if enabled):
+```env
+NEXT_PUBLIC_ENCRYPTION_KEY=your_encryption_key
+NEXT_PUBLIC_ENCRYPTION_MODE=none|hash|encrypt
 ```
-
----
-
-## ✅ 强制执行规则
-
-```yaml
-必须遵循:
-  1. 并行优先 - 识别可并行操作，同时执行
-  2. 官方最佳实践 - 使用Claude 4并行指导
-  3. 智能分流 - 根据复杂度选择处理模式
-  4. MCP工具优先 - 避免内置工具限制
-  5. 中文回答 - 保持用户友好体验
-
-动态生成规则:
-  1. 自动触发 - 复杂项目自动生成专家
-  2. 批量创建 - 自动创建.claude/agents/*.md文件
-  3. 并行注入 - 每个subagent自动包含并行优化
-  4. 立即可用 - 生成后可直接使用"> Use the {agent-name} subagent"
-
-自动优化:
-  - 检测独立操作 -> 启用工具级并行
-  - 识别专业需求 -> 生成对应subagents
-  - 发现复杂场景 -> 启用三层并行架构
-  - 项目变化 -> 自动更新配置
-```
-
----

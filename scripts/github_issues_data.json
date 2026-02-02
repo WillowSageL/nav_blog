@@ -1,0 +1,239 @@
+{
+  "epics": [
+    {
+      "id": "epic1",
+      "title": "[Epic 1] 赛博朋克视觉风格 (Cyberpunk Visual Style)",
+      "description": "实现完整的赛博朋克配色方案，包括深色基调、霓虹色强调、渐变效果和发光元素。",
+      "user_story": {
+        "as_a": "二次元爱好者",
+        "i_want": "看到深蓝、紫色、霓虹色调的赛博朋克配色方案",
+        "so_that": "界面能反映我的审美偏好，而不是千篇一律的商务风格"
+      },
+      "acceptance_criteria": [
+        "主色调采用深蓝（#0a0e27）、紫色（#6366f1）、霓虹粉（#ec4899）、霓虹青（#06b6d4）",
+        "背景使用深色基调，避免刺眼的亮色",
+        "文字和图标使用高对比度的霓虹色，确保可读性",
+        "支持暗色模式（默认）和亮色模式切换",
+        "移动端保持相同的配色方案"
+      ],
+      "success_metrics": "All pages use new cyberpunk color scheme; Theme toggle works smoothly; Accessibility contrast ratios meet WCAG AA standards",
+      "milestone": "Phase 1: Visual Style Refactoring",
+      "labels": ["epic", "phase-1", "ui", "design", "priority-p0"],
+      "tasks": [
+        {
+          "title": "Setup Tailwind CSS cyberpunk color palette",
+          "background": "需要在 Tailwind 配置中定义赛博朋克风格的颜色系统，包括深蓝、紫色、霓虹粉、霓虹青等主题色。",
+          "acceptance_criteria": [
+            "在 tailwind.config.js 中添加自定义颜色",
+            "定义 CSS 变量用于动态主题切换",
+            "颜色命名清晰且语义化",
+            "包含所有必需的色调变体（50-950）"
+          ],
+          "files": ["tailwind.config.js", "src/app/globals.css"],
+          "steps": [
+            "在 tailwind.config.js 的 theme.extend.colors 中添加颜色定义",
+            "在 globals.css 中定义 CSS 变量",
+            "测试颜色在不同组件中的显示效果"
+          ],
+          "estimated_time": "2h",
+          "priority": "P0",
+          "size": "size-small",
+          "labels": ["feature", "phase-1", "ui", "design", "priority-p0", "size-small"]
+        },
+        {
+          "title": "Create dark theme base styles with deep blue background",
+          "background": "创建深色主题的基础样式，包括深蓝色背景和基础布局样式。",
+          "acceptance_criteria": [
+            "页面背景使用深蓝色（#0a0e27）",
+            "文字颜色具有足够的对比度",
+            "所有基础组件应用深色主题",
+            "避免刺眼的亮色"
+          ],
+          "files": ["src/app/globals.css", "src/app/layout.tsx"],
+          "steps": [
+            "在 globals.css 中定义 dark theme 基础样式",
+            "更新 body 背景色",
+            "设置默认文字颜色和链接颜色"
+          ],
+          "estimated_time": "2h",
+          "priority": "P0",
+          "size": "size-small",
+          "blocked_by": "Task 1",
+          "labels": ["feature", "phase-1", "ui", "design", "priority-p0", "size-small"]
+        },
+        {
+          "title": "Implement neon color scheme for text and icons",
+          "background": "为文字和图标实现霓虹色配色方案，确保高对比度和可读性。",
+          "acceptance_criteria": [
+            "标题使用霓虹紫色或霓虹粉色",
+            "图标使用霓虹青色",
+            "链接使用霓虹色并有 hover 效果",
+            "确保 WCAG AA 对比度标准"
+          ],
+          "files": ["src/app/globals.css", "src/components/ui/*.tsx"],
+          "steps": [
+            "定义文字和图标的霓虹色类",
+            "更新现有组件的颜色类",
+            "添加 hover 和 active 状态样式"
+          ],
+          "estimated_time": "2h",
+          "priority": "P0",
+          "size": "size-small",
+          "blocked_by": "Task 1",
+          "labels": ["feature", "phase-1", "ui", "design", "priority-p0", "size-small"]
+        },
+        {
+          "title": "Add glow effects to interactive elements (buttons, links)",
+          "background": "为按钮、链接等交互元素添加霓虹发光效果，增强赛博朋克氛围。",
+          "acceptance_criteria": [
+            "按钮具有霓虹色边框和发光效果",
+            "hover 时发光效果增强",
+            "使用 box-shadow 实现发光",
+            "性能优化，避免过度重绘"
+          ],
+          "files": ["src/components/ui/button.tsx", "src/app/globals.css"],
+          "steps": [
+            "创建 glow 效果的 CSS 类",
+            "更新 Button 组件样式",
+            "添加 hover 动画",
+            "测试性能影响"
+          ],
+          "estimated_time": "3h",
+          "priority": "P1",
+          "size": "size-medium",
+          "blocked_by": "Task 1",
+          "labels": ["feature", "phase-1", "ui", "animation", "priority-p1", "size-medium"]
+        },
+        {
+          "title": "Create light mode variant with cyberpunk aesthetics",
+          "background": "创建亮色模式的赛博朋克风格变体，保持视觉一致性。",
+          "acceptance_criteria": [
+            "浅色背景 + 深色霓虹色",
+            "保持赛博朋克风格特征",
+            "与暗色模式视觉一致",
+            "对比度符合可访问性标准"
+          ],
+          "files": ["src/app/globals.css", "tailwind.config.js"],
+          "steps": [
+            "定义 light mode 的颜色变量",
+            "创建 light mode 的 CSS 类",
+            "测试所有组件在 light mode 下的显示"
+          ],
+          "estimated_time": "3h",
+          "priority": "P1",
+          "size": "size-medium",
+          "blocked_by": "Task 2",
+          "labels": ["feature", "phase-1", "ui", "design", "priority-p1", "size-medium"]
+        },
+        {
+          "title": "Update all existing components to use new color system",
+          "background": "将所有现有组件迁移到新的赛博朋克配色系统。",
+          "acceptance_criteria": [
+            "所有组件使用新的颜色变量",
+            "移除旧的颜色类",
+            "保持组件功能不变",
+            "视觉效果统一"
+          ],
+          "files": ["src/components/**/*.tsx", "src/app/**/*.tsx"],
+          "steps": [
+            "审查所有组件的颜色使用",
+            "逐个更新组件颜色类",
+            "测试每个组件的显示效果",
+            "清理未使用的旧样式"
+          ],
+          "estimated_time": "4h",
+          "priority": "P0",
+          "size": "size-large",
+          "blocked_by": "Task 1, Task 2, Task 3",
+          "labels": ["feature", "phase-1", "ui", "priority-p0", "size-large"]
+        },
+        {
+          "title": "Add theme toggle functionality for dark/light modes",
+          "background": "实现主题切换功能，允许用户在暗色和亮色模式之间切换。",
+          "acceptance_criteria": [
+            "添加主题切换按钮",
+            "切换时平滑过渡",
+            "保存用户偏好到 localStorage",
+            "页面刷新后保持主题选择"
+          ],
+          "files": ["src/components/ThemeToggle.tsx", "src/app/layout.tsx"],
+          "steps": [
+            "创建 ThemeToggle 组件",
+            "实现主题切换逻辑",
+            "添加 localStorage 持久化",
+            "添加切换动画"
+          ],
+          "estimated_time": "2h",
+          "priority": "P1",
+          "size": "size-small",
+          "blocked_by": "Task 5",
+          "labels": ["feature", "phase-1", "ui", "priority-p1", "size-small"]
+        },
+        {
+          "title": "Implement responsive color adjustments for mobile",
+          "background": "优化移动端的颜色显示，确保在小屏幕上的可读性和视觉效果。",
+          "acceptance_criteria": [
+            "移动端保持相同的配色方案",
+            "调整发光效果强度（性能考虑）",
+            "确保触摸目标的对比度",
+            "测试不同移动设备"
+          ],
+          "files": ["src/app/globals.css", "tailwind.config.js"],
+          "steps": [
+            "添加移动端特定的媒体查询",
+            "调整发光效果参数",
+            "测试移动端显示效果"
+          ],
+          "estimated_time": "2h",
+          "priority": "P1",
+          "size": "size-small",
+          "blocked_by": "Task 6",
+          "labels": ["feature", "phase-1", "ui", "priority-p1", "size-small"]
+        },
+        {
+          "title": "Add high contrast mode for accessibility",
+          "background": "添加高对比度模式，提升可访问性，满足视觉障碍用户需求。",
+          "acceptance_criteria": [
+            "提供高对比度模式选项",
+            "对比度符合 WCAG AAA 标准",
+            "保持赛博朋克风格",
+            "可通过设置切换"
+          ],
+          "files": ["src/app/globals.css", "src/components/Settings.tsx"],
+          "steps": [
+            "定义高对比度颜色变量",
+            "创建高对比度 CSS 类",
+            "添加设置选项",
+            "测试可访问性"
+          ],
+          "estimated_time": "3h",
+          "priority": "P2",
+          "size": "size-medium",
+          "blocked_by": "Task 6",
+          "labels": ["enhancement", "phase-1", "ui", "priority-p2", "size-medium"]
+        },
+        {
+          "title": "Create color system documentation",
+          "background": "创建颜色系统文档，说明颜色使用规范和最佳实践。",
+          "acceptance_criteria": [
+            "文档包含所有颜色定义",
+            "提供使用示例",
+            "说明可访问性指南",
+            "包含代码示例"
+          ],
+          "files": ["docs/color-system.md"],
+          "steps": [
+            "编写颜色系统概述",
+            "添加颜色使用示例",
+            "记录可访问性指南"
+          ],
+          "estimated_time": "1h",
+          "priority": "P3",
+          "size": "size-small",
+          "blocked_by": "Task 6",
+          "labels": ["documentation", "phase-1", "priority-p3", "size-small"]
+        }
+      ]
+    }
+  ]
+}
