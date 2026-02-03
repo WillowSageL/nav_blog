@@ -24,7 +24,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem
-          themes={["light", "dark", "cyberpunk"]}
+          themes={["light", "dark", "cyberpunk", "high-contrast"]}
           disableTransitionOnChange
         >
           <EnhancedAuthProvider>

@@ -137,6 +137,29 @@
     --ring: 189 94% 43%;
   }
 
+  /* High Contrast Mode - WCAG AA Compliant */
+  .high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 300 100% 60%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 60 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 10%;
+    --ring: 180 100% 50%;
+  }
+
   /* Mobile responsive color adjustments for better contrast */
   @media (max-width: 640px) {
     .dark,
@@ -148,6 +171,14 @@
       --primary-foreground: 210 40% 100%;
       --secondary-foreground: 210 40% 100%;
     }
+  }
+
+  /* High contrast mode maintains maximum contrast on all devices */
+  .high-contrast {
+    --foreground: 0 0% 100%;
+    --card-foreground: 0 0% 100%;
+    --popover-foreground: 0 0% 100%;
+    --muted-foreground: 0 0% 80%;
   }
 }
 
@@ -324,6 +355,63 @@
     text-shadow: 0 0 12px rgba(190, 24, 93, 0.5);
   }
 
+  /* High Contrast Mode Neon Adjustments - Maximum visibility */
+  .high-contrast .text-neon-pink {
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+  }
+  .high-contrast .text-neon-cyan {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  }
+  .high-contrast .text-neon-purple {
+    color: #bf00ff;
+    text-shadow: 0 0 10px rgba(191, 0, 255, 0.8);
+  }
+  .high-contrast .icon-neon-pink {
+    color: #ff00ff;
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.8));
+  }
+  .high-contrast .icon-neon-cyan {
+    color: #00ffff;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+  }
+  .high-contrast .icon-neon-purple {
+    color: #bf00ff;
+    filter: drop-shadow(0 0 8px rgba(191, 0, 255, 0.8));
+  }
+  .high-contrast .text-neon-accent {
+    color: #ffff00;
+    text-shadow: 0 0 12px rgba(255, 255, 0, 0.8);
+  }
+  .high-contrast .hover\:text-neon-pink:hover,
+  .high-contrast .group:hover .group-hover\:text-neon-pink {
+    color: #ff00ff;
+    text-shadow: 0 0 14px rgba(255, 0, 255, 0.9);
+  }
+  .high-contrast .hover\:text-neon-cyan:hover,
+  .high-contrast .group:hover .group-hover\:text-neon-cyan {
+    color: #00ffff;
+    text-shadow: 0 0 14px rgba(0, 255, 255, 0.9);
+  }
+  .high-contrast .hover\:text-neon-purple:hover,
+  .high-contrast .group:hover .group-hover\:text-neon-purple {
+    color: #bf00ff;
+    text-shadow: 0 0 14px rgba(191, 0, 255, 0.9);
+  }
+  .high-contrast .group:hover .group-hover\:icon-neon-pink {
+    color: #ff00ff;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.9));
+  }
+  .high-contrast .group:hover .group-hover\:icon-neon-cyan {
+    color: #00ffff;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.9));
+  }
+  .high-contrast .group:hover .group-hover\:icon-neon-purple {
+    color: #bf00ff;
+    filter: drop-shadow(0 0 10px rgba(191, 0, 255, 0.9));
+  }
+
   /* 交互组件发光效果 - Glow Effects for Interactive Elements */
   .glow-interactive {
     transition: box-shadow 0.2s ease-out;
@@ -418,6 +506,29 @@
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25), 0 0 12px rgba(99, 102, 241, 0.35);
   }
 
+  /* High Contrast Mode Glow Adjustments - Maximum visibility */
+  .high-contrast .glow-interactive:hover {
+    box-shadow: 0 0 16px rgba(0, 255, 255, 0.7);
+  }
+  .high-contrast .glow-interactive:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.6);
+  }
+  .high-contrast .glow-button:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  }
+  .high-contrast .glow-button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.9), 0 0 24px rgba(255, 255, 0, 0.7);
+  }
+  .high-contrast .glow-button:active {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.9);
+  }
+  .high-contrast .glow-input:hover:not(:focus-visible):not(:disabled) {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  }
+  .high-contrast .glow-input:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.8), 0 0 16px rgba(255, 255, 0, 0.6);
+  }
+
   /* 优化的滚动条 */
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
@@ -446,6 +557,17 @@
   }
   .light .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(99, 102, 241, 0.5);
+  }
+
+  /* High Contrast Mode Scrollbar */
+  .high-contrast .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .high-contrast .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.6);
+  }
+  .high-contrast .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 0.9);
   }
 
   /* 防止白屏闪动 */
