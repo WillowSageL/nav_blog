@@ -12,7 +12,22 @@
       "mcp__sequential-thinking__sequentialthinking",
       "Bash(chmod:*)",
       "Bash(curl -s -b \"access_token=eyJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMDM0NmI5ZDYtOGMxZC00OTU0LTliNTAtZTI4MWVhZWMzNWY3IiwiZW1haWwiOiIyNDcyMDUxNDJAcXEuY29tIiwiaXNzIjoiY291cnNlLXBsYXRmb3JtIiwiYXVkIjoiY291cnNlLXBsYXRmb3JtIiwiaWF0IjoxNzY5OTA3NzIxLCJleHAiOjE3NzA1MTI1MjEsImp0aSI6ImM0NTRjNjE5LWJhZDUtNDQ4MS05ZTg3LTY3YzVmMmQwNjUzMiJ9.h_rtug3oEvwnn3EDm1FiatAOPi7IwRMF8BED683D5SgGvGfns1b-7exrNDttY6rfRwxWf0EB-JNT2hV0zGS4dWySPu7OQFcOzuC_KGkSnoF5if2PKF3zjFuzPKbFkiGl2WD1TPVl_Ml4eQS8SsU6NOpcHUZFlqR69qG2PoV_nyojf1eNIOwd5ka_8mVbluloBKBGYdF70qnfR8ccfBBuls-Br1s0SCjJo9qu_43BJC44DeBsTimgBieGfsc-abquCHv2umJ6IstClqmKkAyVzGPBzpXhcdlbrTmcxNWxEot3JuuioZu_nOt8EpXZfGYjx9BhArD8xFjoCRqPxWj04g; refresh_token=eyJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInVzZXJJZCI6IjAzNDZiOWQ2LThjMWQtNDk1NC05YjUwLWUyODFlYWVjMzVmNyIsImVtYWlsIjoiMjQ3MjA1MTQyQHFxLmNvbSIsImlzcyI6ImNvdXJzZS1wbGF0Zm9ybSIsImF1ZCI6ImNvdXJzZS1wbGF0Zm9ybSIsImlhdCI6MTc2OTkwNzcyMSwiZXhwIjoxNzcyNDk5NzIxLCJqdGkiOiIzZTJiNmE1ZC0yYzc2LTQ2OGYtOTlhMi05NDY5NjA4YzFkYTYifQ.TX5qnzfPRD3t2WM9MoK5OWFmEsFsDOXXrUuz10ZqiBuMPHNQ4nWAwmpAUjijzVdbYxKggMTc0UbMrin7pxmCsrIFzUbP50CSRjWH7MIxQy3R0JaKxW7CBNs-WG0cUbFv0FryGndLyPuGVHcXce62uXvR_HNJUVmJcmeqkPtYRFcf3PqnWeNXGeuxeT1f6iMBN7SzxW-d8wj4fOdsB6YrUb7owuzeKoruerchiDPKUbVA9eq7pt4dW79K116wt4RLpWz2681hdYRZ2-yTsmLwLmkeH67vuCnMU9zYw3A4kfznb1loTIXQyEFLPIdsqgxdx390p36d_RvZkKj25dYP2Q\" \"https://course.stellarlink.co/learn/cmk6u4n770000nn409c35ar8s?lessonId=cmky6td2h007ann57nc6bdwxq\")",
-      "Bash(gh issue view:*)"
+      "Bash(gh issue view:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(REQUEST_CHANGES)",
+      "Bash(COMMENT\",\n  \"issues\": [\n    {\n      \"severity\": \"CRITICAL)",
+      "Bash(HIGH)",
+      "Bash(MEDIUM)",
+      "Bash(LOW\",\n      \"category\": \"security)",
+      "Bash(logic)",
+      "Bash(performance)",
+      "Bash(quality)",
+      "Bash(testing\",\n      \"file\": \"path/to/file.ts\",\n      \"line\": 42,\n      \"description\": \"Issue description\",\n      \"suggestion\": \"How to fix\",\n      \"diff\": \"Unified diff patch if applicable\"\n    }\n  ],\n  \"auto_fixable\": [\"issue indices that can be auto-fixed\"],\n  \"requires_human\": [\"issue indices requiring human decision\"]\n}\n\nOUTPUT: Review JSON ONLY. Do NOT make any actual modifications.\nEOF\n\\)\")",
+      "Bash(gh issue view:*)",
+      "mcp__auggie-mcp__codebase-retrieval",
+      "Bash(gh pr comment:*)"
     ],
     "deny": []
   }
