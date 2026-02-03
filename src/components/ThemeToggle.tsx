@@ -1,6 +1,6 @@
 'use client'
 
-import { Moon, Sun, Zap, Monitor } from 'lucide-react'
+import { Moon, Sun, Zap, Monitor, Contrast } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
@@ -24,6 +24,7 @@ export function ThemeToggle() {
     if (theme === 'system') setTheme('light')
     else if (theme === 'light') setTheme('dark')
     else if (theme === 'dark') setTheme('cyberpunk')
+    else if (theme === 'cyberpunk') setTheme('high-contrast')
     else setTheme('system')
   }
 
@@ -33,6 +34,7 @@ export function ThemeToggle() {
       case 'light': return <Sun className="w-4 h-4" />
       case 'dark': return <Moon className="w-4 h-4" />
       case 'cyberpunk': return <Zap className="w-4 h-4" />
+      case 'high-contrast': return <Contrast className="w-4 h-4" />
       default: return <Monitor className="w-4 h-4" />
     }
   }
@@ -41,7 +43,8 @@ export function ThemeToggle() {
     system: '系统',
     light: '浅色',
     dark: '深色',
-    cyberpunk: '赛博朋克'
+    cyberpunk: '赛博朋克',
+    'high-contrast': '高对比度'
   }
 
   return (
