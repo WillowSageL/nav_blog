@@ -114,6 +114,19 @@
     --input: 232 50% 15%;
     --ring: 189 94% 43%;
   }
+
+  /* Mobile responsive color adjustments for better contrast */
+  @media (max-width: 640px) {
+    .dark,
+    .cyberpunk {
+      --foreground: 210 40% 100%;
+      --card-foreground: 210 40% 100%;
+      --popover-foreground: 210 40% 100%;
+      --muted-foreground: 215 20% 75%;
+      --primary-foreground: 210 40% 100%;
+      --secondary-foreground: 210 40% 100%;
+    }
+  }
 }
 
 @layer base {
