@@ -222,6 +222,43 @@
     color: #818cf8;
     filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.8));
   }
+
+  /* 交互组件发光效果 - Glow Effects for Interactive Elements */
+  .glow-interactive {
+    transition: box-shadow 0.2s ease-out;
+  }
+  .glow-interactive:hover {
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+  }
+  .glow-interactive:focus-visible {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 16px rgba(99, 102, 241, 0.4);
+  }
+
+  /* 按钮专用发光 */
+  .glow-button {
+    transition: box-shadow 0.2s ease-out, transform 0.15s ease-out;
+  }
+  .glow-button:hover {
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.5);
+  }
+  .glow-button:focus-visible {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4), 0 0 20px rgba(99, 102, 241, 0.5);
+  }
+  .glow-button:active {
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+    transform: scale(0.98);
+  }
+
+  /* 输入框专用发光 */
+  .glow-input {
+    transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+  }
+  .glow-input:hover:not(:focus-visible):not(:disabled) {
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+  }
+  .glow-input:focus-visible {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 12px rgba(99, 102, 241, 0.4);
+  }
 }
 
 /* 优化的动画 */
