@@ -84,7 +84,7 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-card rounded-2xl flex items-center justify-center border border-primary/30 shadow-neon-purple/50">
+              <div className="w-12 h-12 bg-card rounded-2xl flex items-center justify-center border border-primary/30 shadow-neon-purple">
                 <span className="text-2xl icon-neon-pink">🚀</span>
               </div>
               <div>
