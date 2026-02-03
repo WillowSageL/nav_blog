@@ -348,7 +348,7 @@ export function BookmarkManager({ selectedCategoryId, categories }: BookmarkMana
                             href={bookmark.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-blue-600 hover:underline flex items-center gap-1"
+                            className="text-sm text-accent hover:text-neon-cyan hover:underline flex items-center gap-1 transition-colors"
                           >
                             <ExternalLink className="w-3 h-3" />
                             {new URL(bookmark.url).hostname}
