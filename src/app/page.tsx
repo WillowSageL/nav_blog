@@ -82,10 +82,10 @@ export default function Home() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center border border-white/30">
-                <span className="text-2xl">🚀</span>
+                <span className="text-2xl icon-neon-pink">🚀</span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">我的导航</h1>
+                <h1 className="text-3xl font-bold text-neon-purple">我的导航</h1>
                 <p className="text-white/70 text-sm">发现精彩世界</p>
               </div>
             </div>

@@ -40,12 +40,12 @@ export function BookmarkCard({ bookmark }: BookmarkCardProps) {
             </div>
           ) : (
             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
-              <ExternalLink className="w-4 h-4 text-white/80" />
+              <ExternalLink className="w-4 h-4 text-white/80 group-hover:icon-neon-cyan transition-all" />
             </div>
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-white group-hover:text-white/90 transition-colors text-sm leading-tight">
+          <h3 className="font-semibold text-white group-hover:text-neon-pink transition-colors text-sm leading-tight">
             {bookmark.title}
           </h3>
           {bookmark.description && (
