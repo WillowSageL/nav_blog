@@ -10,6 +10,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Plus, Edit2, Trash2, Save, X, ExternalLink } from 'lucide-react'
+import { useAuth } from '@/components/EnhancedAuthProvider'
 
 interface BookmarkManagerProps {
   selectedCategoryId?: string | null
@@ -23,6 +24,7 @@ export function BookmarkManager({ selectedCategoryId, categories }: BookmarkMana
   const [editingId, setEditingId] = useState<string | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
   const hasInitialized = useRef(false) // 防止重复初始化
+  const { user } = useAuth()
 
   const fetchBookmarks = useCallback(async () => {
     try {
@@ -77,11 +79,17 @@ export function BookmarkManager({ selectedCategoryId, categories }: BookmarkMana
     const categoryId = formData.get('category_id') as string
 
     try {
+      if (!user?.id) {
+        setError('请先登录')
+        return
+      }
+
       const faviconUrl = getFaviconUrl(url)
       
       const { error } = await supabase
         .from('bookmarks')
         .insert({
+          user_id: user.id,
           title,
           url,
           description: description || null,

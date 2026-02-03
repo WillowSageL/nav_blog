@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Category } from '@/lib/types'
+import { useAuth } from '@/components/EnhancedAuthProvider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -26,6 +27,7 @@ export function CategoryManager({
   const [editingId, setEditingId] = useState<string | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
   const hasInitialized = useRef(false) // 防止重复初始化
+  const { user } = useAuth()
 
   const fetchCategories = useCallback(async () => {
     try {
@@ -62,9 +64,15 @@ export function CategoryManager({
     const icon = formData.get('icon') as string
 
     try {
+      if (!user?.id) {
+        setError('请先登录')
+        return
+      }
+
       const { error } = await supabase
         .from('categories')
         .insert({
+          user_id: user.id,
           name,
           icon: icon || null,
           sort_order: categories.length + 1

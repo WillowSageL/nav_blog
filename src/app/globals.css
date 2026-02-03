@@ -24,32 +24,55 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
+    /* Cyberpunk palette tokens (50-950) */
+    --cyber-dark-50: #e6e7e9;
+    --cyber-dark-100: #c2c3c9;
+    --cyber-dark-200: #9d9fa9;
+    --cyber-dark-300: #6c6e7d;
+    --cyber-dark-400: #3b3e52;
+    --cyber-dark-500: #0a0e27;
+    --cyber-dark-600: #090d23;
+    --cyber-dark-700: #080b1f;
+    --cyber-dark-800: #060919;
+    --cyber-dark-900: #050714;
+    --cyber-dark-950: #04050e;
+    --cyber-purple-50: #eff0fe;
+    --cyber-purple-100: #d8d9fc;
+    --cyber-purple-200: #c1c2f9;
+    --cyber-purple-300: #a1a3f7;
+    --cyber-purple-400: #8285f4;
+    --cyber-purple-500: #6366f1;
+    --cyber-purple-600: #595cd9;
+    --cyber-purple-700: #4f52c1;
+    --cyber-purple-800: #40429d;
+    --cyber-purple-900: #323378;
+    --cyber-purple-950: #232454;
+    --cyber-pink-50: #fdedf5;
+    --cyber-pink-100: #fad1e6;
+    --cyber-pink-200: #f7b6d6;
+    --cyber-pink-300: #f491c2;
+    --cyber-pink-400: #f06dad;
+    --cyber-pink-500: #ec4899;
+    --cyber-pink-600: #d4418a;
+    --cyber-pink-700: #bd3a7a;
+    --cyber-pink-800: #992f63;
+    --cyber-pink-900: #76244c;
+    --cyber-pink-950: #531936;
+    --cyber-cyan-50: #e6f8fb;
+    --cyber-cyan-100: #c1edf4;
+    --cyber-cyan-200: #9be2ee;
+    --cyber-cyan-300: #6ad3e5;
+    --cyber-cyan-400: #38c5dd;
+    --cyber-cyan-500: #06b6d4;
+    --cyber-cyan-600: #05a4bf;
+    --cyber-cyan-700: #0592aa;
+    --cyber-cyan-800: #04768a;
+    --cyber-cyan-900: #035b6a;
+    --cyber-cyan-950: #02404a;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
-  }
-
-  .cyberpunk {
-    --background: 232 60% 10%;
+    --background: 232 59% 10%;
     --foreground: 210 40% 98%;
     --card: 232 55% 12%;
     --card-foreground: 210 40% 98%;
@@ -62,7 +85,29 @@
     --muted: 232 50% 15%;
     --muted-foreground: 215 20% 65%;
     --accent: 189 94% 43%;
-    --accent-foreground: 232 60% 10%;
+    --accent-foreground: 232 59% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 239 60% 50%;
+    --input: 232 50% 15%;
+    --ring: 189 94% 43%;
+  }
+
+  .cyberpunk {
+    --background: 232 59% 10%;
+    --foreground: 210 40% 98%;
+    --card: 232 55% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 232 55% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 330 81% 60%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 232 50% 15%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 189 94% 43%;
+    --accent-foreground: 232 59% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 239 60% 50%;
