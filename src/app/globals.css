@@ -72,7 +72,7 @@
   }
 
   .dark {
-    --background: 232 59% 10%;
+    --background: 232 59% 9.5%;
     --foreground: 210 40% 98%;
     --card: 232 55% 12%;
     --card-foreground: 210 40% 98%;
@@ -94,7 +94,7 @@
   }
 
   .cyberpunk {
-    --background: 232 59% 10%;
+    --background: 232 59% 9.5%;
     --foreground: 210 40% 98%;
     --card: 232 55% 12%;
     --card-foreground: 210 40% 98%;
