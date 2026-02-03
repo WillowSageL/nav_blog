@@ -139,13 +139,13 @@ export function EnhancedAuthDialog({ onClose }: EnhancedAuthDialogProps) {
 
   const getPasswordStrengthText = () => {
     switch (passwordStrength.score) {
-      case 0: return { text: '无', color: 'text-red-500' }
-      case 1: return { text: '很弱', color: 'text-red-500' }
-      case 2: return { text: '弱', color: 'text-orange-500' }
-      case 3: return { text: '中等', color: 'text-yellow-500' }
-      case 4: return { text: '强', color: 'text-blue-500' }
-      case 5: return { text: '很强', color: 'text-green-500' }
-      default: return { text: '未知', color: 'text-gray-500' }
+      case 0: return { text: '无', color: 'text-cyber-pink-600' }
+      case 1: return { text: '很弱', color: 'text-cyber-pink-500' }
+      case 2: return { text: '弱', color: 'text-cyber-pink-400' }
+      case 3: return { text: '中等', color: 'text-cyber-purple-400' }
+      case 4: return { text: '强', color: 'text-cyber-cyan-400' }
+      case 5: return { text: '很强', color: 'text-neon-cyan' }
+      default: return { text: '未知', color: 'text-muted-foreground' }
     }
   }
 
@@ -153,11 +153,11 @@ export function EnhancedAuthDialog({ onClose }: EnhancedAuthDialogProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9998]">
-      <Card className="w-full max-w-md mx-4 bg-white dark:bg-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <Card className="w-full max-w-md mx-4 bg-card border-primary/30 shadow-2xl max-h-[90vh] overflow-y-auto">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-500" />
+              <Shield className="w-5 h-5 text-primary" />
               <div>
                 <CardTitle>安全认证</CardTitle>
                 <CardDescription>
@@ -173,7 +173,7 @@ export function EnhancedAuthDialog({ onClose }: EnhancedAuthDialogProps) {
         
         <CardContent>
           {/* 安全选项 */}
-          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="mb-4 p-3 bg-primary/10 border border-primary/20 rounded-lg">
             <div className="flex items-center space-x-2 mb-2">
               <Checkbox
                 id="encryption"
@@ -317,22 +317,22 @@ export function EnhancedAuthDialog({ onClose }: EnhancedAuthDialogProps) {
                     
                     {/* 密码要求检查列表 */}
                     <div className="grid grid-cols-2 gap-1 text-xs">
-                      <div className={passwordStrength.requirements.length ? 'text-green-500' : 'text-gray-400'}>
+                      <div className={passwordStrength.requirements.length ? 'text-accent' : 'text-muted-foreground'}>
                         ✓ 至少8位
                       </div>
-                      <div className={passwordStrength.requirements.uppercase ? 'text-green-500' : 'text-gray-400'}>
+                      <div className={passwordStrength.requirements.uppercase ? 'text-accent' : 'text-muted-foreground'}>
                         ✓ 大写字母
                       </div>
-                      <div className={passwordStrength.requirements.lowercase ? 'text-green-500' : 'text-gray-400'}>
+                      <div className={passwordStrength.requirements.lowercase ? 'text-accent' : 'text-muted-foreground'}>
                         ✓ 小写字母
                       </div>
-                      <div className={passwordStrength.requirements.numbers ? 'text-green-500' : 'text-gray-400'}>
+                      <div className={passwordStrength.requirements.numbers ? 'text-accent' : 'text-muted-foreground'}>
                         ✓ 数字
                       </div>
-                      <div className={passwordStrength.requirements.symbols ? 'text-green-500' : 'text-gray-400'}>
+                      <div className={passwordStrength.requirements.symbols ? 'text-accent' : 'text-muted-foreground'}>
                         ✓ 特殊字符
                       </div>
-                      <div className={passwordsMatch ? 'text-green-500' : 'text-red-500'}>
+                      <div className={passwordsMatch ? 'text-accent' : 'text-secondary'}>
                         ✓ 密码匹配
                       </div>
                     </div>
@@ -362,9 +362,9 @@ export function EnhancedAuthDialog({ onClose }: EnhancedAuthDialogProps) {
           )}
 
           {success && (
-            <Alert className="mt-4 border-green-500">
+            <Alert className="mt-4 border-accent/50 bg-accent/10">
               <ShieldCheck className="h-4 w-4" />
-              <AlertDescription className="text-green-700">
+              <AlertDescription className="text-accent">
                 {success}
               </AlertDescription>
             </Alert>
